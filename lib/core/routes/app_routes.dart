@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_binding.dart';
+import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_page.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_binding.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_page.dart';
 import 'package:tomato_leaf/feature/utils/presentation/dashboard/dashboard_binding.dart';
@@ -24,6 +26,11 @@ class AppRoutes {
       name: DashboardPage.routeName.toString(),
       page: () => const DashboardPage(),
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: DetailDevicePage.routeName.toString(),
+      page: () => const DetailDevicePage(),
+      binding: DetailDeviceBinding(),
     ),
   ];
 }

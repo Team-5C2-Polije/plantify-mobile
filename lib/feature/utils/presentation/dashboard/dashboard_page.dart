@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tomato_leaf/core/styles/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_page.dart';
 
 class DashboardPage extends StatelessWidget {
   static String routeName = '/dashboard';
@@ -141,80 +143,85 @@ class DashboardPage extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: Container(
-                      width: double.infinity,
-                      height: 110.h,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffD9D9D9),
-                        borderRadius: AppSizes.radiusMedium,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "DEVICE ${++index}",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
-                                    color: const Color(0xff405268),
+                  return GestureDetector(
+                    onTap: () async {
+                      Get.toNamed(DetailDevicePage.routeName.toString());
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 10.h),
+                      child: Container(
+                        width: double.infinity,
+                        height: 110.h,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffD9D9D9),
+                          borderRadius: AppSizes.radiusMedium,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "DEVICE ${++index}",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                      color: const Color(0xff405268),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "2024-10-10 17:00",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xff405268),
+                                  Text(
+                                    "2024-10-10 17:00",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff405268),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/ic-water-gray.svg',
+                                      ),
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        "48",
+                                        style: GoogleFonts.inter(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10.w),
+                                      SvgPicture.asset(
+                                        'assets/icons/ic-sun.svg',
+                                      ),
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        "300",
+                                        style: GoogleFonts.inter(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/icons/ic-water-gray.svg',
-                                    ),
-                                    SizedBox(width: 3.w),
-                                    Text(
-                                      "48",
-                                      style: GoogleFonts.inter(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    SvgPicture.asset(
-                                      'assets/icons/ic-sun.svg',
-                                    ),
-                                    SizedBox(width: 3.w),
-                                    Text(
-                                      "300",
-                                      style: GoogleFonts.inter(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset('assets/icons/ic-tree.svg')
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset('assets/icons/ic-tree.svg')
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
