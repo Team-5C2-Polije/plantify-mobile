@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomato_leaf/core/widgets/device_top.dart';
 import 'package:tomato_leaf/feature/device/presentation/components/item_feature.dart';
+import 'package:tomato_leaf/feature/sensor/presentation/light_intensity/light_intensity_page.dart';
+import 'package:tomato_leaf/feature/sensor/presentation/volume/volume_page.dart';
 
 class DetailDevicePage extends StatelessWidget {
   static String routeName = '/detail_device_page';
@@ -35,34 +38,46 @@ class DetailDevicePage extends StatelessWidget {
               nextWatering: '15:00',
             ),
             SizedBox(height: 50.h),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ItemFeature(
                   imagePath: 'assets/icons/ic-water-blue.svg',
                   title: "Volume Air",
                   value: "40%",
+                  onTap: (){
+                    Get.toNamed(VolumePage.routeName.toString());
+                  },
                 ),
                 ItemFeature(
                   imagePath: 'assets/icons/ic-sun-orange.svg',
                   title: "Intensitas Cahaya",
                   value: "300",
+                  onTap: (){
+                    Get.toNamed(LightIntensityPage.routeName.toString());
+                  },
                 ),
               ],
             ),
             SizedBox(height: 20.h),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ItemFeature(
                   imagePath: 'assets/icons/ic-plant.svg',
                   title: "Jadwal Penyiraman",
                   value: "5",
+                  onTap: (){
+                    //
+                  },
                 ),
                 ItemFeature(
                   imagePath: 'assets/icons/ic-photos.svg',
                   title: "Total Foto",
                   value: "50",
+                  onTap: (){
+                    //
+                  },
                 ),
               ],
             ),
