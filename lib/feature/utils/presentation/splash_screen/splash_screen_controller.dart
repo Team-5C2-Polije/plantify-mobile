@@ -5,7 +5,7 @@ class SplashScreenController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    // await Future.delayed(const Duration(seconds: 2));
-    // Get.toNamed(AuthPage.routeName);
+    await Future.delayed(const Duration(seconds: 2));
+    Get.toNamed(AuthPage.routeName);
   }
 }

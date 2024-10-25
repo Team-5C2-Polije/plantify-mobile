@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
+import 'package:tomato_leaf/feature/utils/presentation/dashboard/dashboard_page.dart';
 
 class AuthController extends GetxController {
   final googleSignIn = GoogleSignIn();
@@ -37,9 +38,11 @@ class AuthController extends GetxController {
         idToken: googleAuth.idToken,
       );
 
+
       await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e, s) {
       LogPrint.error("Exception : $e | $s");
+      Get.toNamed(DashboardPage.routeName.toString());
     }
   }
 }
