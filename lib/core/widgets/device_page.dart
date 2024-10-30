@@ -13,6 +13,8 @@ class PageTitle extends StatelessWidget {
     required this.lastWatering,
     required this.nextWatering,
     required this.child,
+    this.space = 50,
+    this.padding = const EdgeInsets.fromLTRB(25, 40, 25, 0),
   });
 
   final String pageTitle;
@@ -22,11 +24,13 @@ class PageTitle extends StatelessWidget {
   final String lastWatering;
   final String nextWatering;
   final Widget child;
+  final double space;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(30, 40.h, 25, 0),
+      padding: padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -46,7 +50,7 @@ class PageTitle extends StatelessWidget {
             lastWatering: lastWatering,
             nextWatering: nextWatering,
           ),
-          SizedBox(height: 50.h),
+          SizedBox(height: space.h),
           child,
         ],
       ),

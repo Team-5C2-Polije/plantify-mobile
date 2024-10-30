@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_page.dart';
+import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_page.dart';
+import 'package:tomato_leaf/feature/profile/presentation/notification/notification_page.dart';
+import 'package:tomato_leaf/feature/profile/presentation/profile/profile_page.dart';
 
 class DashboardPage extends StatelessWidget {
   static String routeName = '/dashboard';
@@ -14,8 +17,6 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mendapatkan lebar layar
-    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,18 +68,28 @@ class DashboardPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(
-                              'assets/icons/ic-notif.svg',
-                              width: 25.w,
-                              height: 25.h,
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(NotificationPage.routeName.toString());
+                              },
+                              child: SvgPicture.asset(
+                                'assets/icons/ic-notif.svg',
+                                width: 25.w,
+                                height: 25.h,
+                              ),
                             ),
                             SizedBox(width: 8.w),
-                            SizedBox(
-                              width: 30.w,
-                              height: 30.h,
-                              child: const Icon(
-                                Icons.account_circle_sharp,
-                                color: Colors.white,
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(ProfilePage.routeName.toString());
+                              },
+                              child: SizedBox(
+                                width: 30.w,
+                                height: 30.h,
+                                child: const Icon(
+                                  Icons.account_circle_sharp,
+                                  color: Colors.white,
+                                ),
                               ),
                             )
                           ],
@@ -119,19 +130,24 @@ class DashboardPage extends StatelessWidget {
                   SizedBox(width: 5.w),
                   Expanded(
                     flex: 15,
-                    child: Container(
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: AppSizes.radiusMedium,
-                          border: Border.all(
-                            color: AppColors.primaryColor,
-                            width: 4,
-                          )),
-                      child: const Center(
-                        child: Icon(
-                          Icons.add,
-                          size: 35,
+                    child: GestureDetector(
+                      onTap: (){
+                        Get.toNamed(UpdateDevicePage.routeName.toString());
+                      },
+                      child: Container(
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: AppSizes.radiusMedium,
+                            border: Border.all(
+                              color: AppColors.primaryColor,
+                              width: 4,
+                            )),
+                        child: const Center(
+                          child: Icon(
+                            Icons.add,
+                            size: 35,
+                          ),
                         ),
                       ),
                     ),

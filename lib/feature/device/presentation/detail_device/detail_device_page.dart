@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomato_leaf/core/widgets/device_top.dart';
 import 'package:tomato_leaf/feature/device/presentation/components/item_feature.dart';
+import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_page.dart';
+import 'package:tomato_leaf/feature/schedule/presentation/list_schedule/list_schedule_page.dart';
 import 'package:tomato_leaf/feature/sensor/presentation/light_intensity/light_intensity_page.dart';
 import 'package:tomato_leaf/feature/sensor/presentation/volume/volume_page.dart';
 
@@ -68,7 +70,7 @@ class DetailDevicePage extends StatelessWidget {
                   title: "Jadwal Penyiraman",
                   value: "5",
                   onTap: (){
-                    //
+                    Get.toNamed(ListSchedulePage.routeName.toString());
                   },
                 ),
                 ItemFeature(
@@ -76,7 +78,7 @@ class DetailDevicePage extends StatelessWidget {
                   title: "Total Foto",
                   value: "50",
                   onTap: (){
-                    //
+                    Get.toNamed(ListPhotoPage.routeName.toString());
                   },
                 ),
               ],

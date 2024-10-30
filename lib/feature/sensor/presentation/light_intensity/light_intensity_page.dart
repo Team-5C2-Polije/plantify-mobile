@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:tomato_leaf/feature/device/presentation/components/item_feature.dart';
+import 'package:tomato_leaf/feature/sensor/presentation/watering_manually/watering_manually_page.dart';
 
 import '../../../../core/widgets/device_page.dart';
 
@@ -26,7 +28,9 @@ class LightIntensityPage extends StatelessWidget {
           value: '400',
           width: double.infinity,
           height: 180.h,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(WateringManuallyPage.routeName.toString());
+          },
         ),
       ),
     );

@@ -68,7 +68,7 @@ class SplashScreenPage extends StatelessWidget {
                   ),
                   SizedBox(height: 40.h),
                   Image.asset(
-                    'assets/images/img-logo.png',
+                    'assets/images/img-tomato-leaf.png',
                     width: 200.w,
                     height: 200.h,
                   ),
