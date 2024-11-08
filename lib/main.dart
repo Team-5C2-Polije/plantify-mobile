@@ -15,7 +15,18 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await signInAnonymously();
   runApp(const MainApp());
+}
+
+Future<void> signInAnonymously() async {
+  try {
+    UserCredential userCredential =
+    await FirebaseAuth.instance.signInAnonymously();
+    LogPrint.info("Signed in with temporary account: ${userCredential.user!.uid}");
+  } catch (e) {
+    LogPrint.error("Failed to sign in anonymously: $e");
+  }
 }
 
 class MainApp extends StatelessWidget {

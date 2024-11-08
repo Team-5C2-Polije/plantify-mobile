@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tomato_leaf/core/styles/app_colors.dart';
-import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -60,7 +59,7 @@ class AuthPage extends StatelessWidget {
                 SizedBox(height: 40.h),
                 GestureDetector(
                   onTap: () async{
-                    await controller.signInWithGoogle();
+                    await controller.authenticate();
                   },
                   child: SizedBox(
                     width: 200.w,

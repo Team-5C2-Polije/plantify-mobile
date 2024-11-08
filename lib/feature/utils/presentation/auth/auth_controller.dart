@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
@@ -11,38 +12,46 @@ class AuthController extends GetxController {
 
   GoogleSignInAccount? get user => _user.value;
 
-  Future<void> signInAnonymously() async {
+  Future<void> _googleAuthLogin() async {
     try {
-      UserCredential userCredential =
-      await FirebaseAuth.instance.signInAnonymously();
-      LogPrint.info(
-          "Signed in with temporary account: ${userCredential.user!.uid}");
-    } catch (e) {
-      LogPrint.error("Failed to sign in anonymously: $e");
-    }
-  }
-
-  Future signInWithGoogle() async {
-    try {
-      // reset akun
-      _user.value = null;
-
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) return;
-      _user.value = googleUser;
 
       final googleAuth = await googleUser.authentication;
-
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-
       await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e, s) {
-      LogPrint.error("Exception : $e | $s");
-      Get.toNamed(DashboardPage.routeName.toString());
+
+      await _googleAuthLogout();
+    } catch (ex, s) {
+      Fluttertoast.showToast(msg: "Exception : $ex");
+      LogPrint.exception(ex, s, this, '_googleAuth');
+    }
+  }
+
+  Future _googleAuthLogout() async {
+    await googleSignIn.disconnect();
+    await googleSignIn.signOut();
+  }
+
+  Future authenticate() async {
+    try {
+      await _googleAuthLogin();
+      LogPrint.debug("after google auth");
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if(currentUser != null){
+        LogPrint.debug("email : ${currentUser.email}");
+        LogPrint.debug("display name : ${currentUser.displayName}");
+        Get.toNamed(DashboardPage.routeName.toString());
+      }else{
+        LogPrint.debug("current user is null");
+      }
+    } catch (ex, s) {
+      Fluttertoast.showToast(msg: "Exception : $ex");
+      LogPrint.exception(ex, s, this, 'googleSign');
     }
   }
 }
