@@ -8,6 +8,7 @@ import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
 import 'package:tomato_leaf/feature/utils/presentation/splash_screen/splash_screen_page.dart';
 
+import 'core/utils/fcm_token_service.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -15,19 +16,21 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await signInAnonymously();
+  // await signInAnonymously();
+  FcmTokenService fcmTokenService = await FcmTokenService().init();
+  LogPrint.info("FCM TOKEN : ${fcmTokenService.fcmToken}");
   runApp(const MainApp());
 }
 
-Future<void> signInAnonymously() async {
-  try {
-    UserCredential userCredential =
-    await FirebaseAuth.instance.signInAnonymously();
-    LogPrint.info("Signed in with temporary account: ${userCredential.user!.uid}");
-  } catch (e) {
-    LogPrint.error("Failed to sign in anonymously: $e");
-  }
-}
+// Future<void> signInAnonymously() async {
+//   try {
+//     UserCredential userCredential =
+//     await FirebaseAuth.instance.signInAnonymously();
+//     LogPrint.info("Signed in with temporary account: ${userCredential.user!.uid}");
+//   } catch (e) {
+//     LogPrint.error("Failed to sign in anonymously: $e");
+//   }
+// }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
