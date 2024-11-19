@@ -1,0 +1,37 @@
+import 'package:dio/src/response.dart';
+import 'package:tomato_leaf/data/datasources/local/user_local_datasource.dart';
+import 'package:tomato_leaf/data/datasources/remote/user_remote_datasource.dart';
+import 'package:tomato_leaf/domain/entities/user/user_entity.dart';
+import 'package:tomato_leaf/domain/repositories/user_repository.dart';
+
+class UserRepositoryImpl implements UserRepository{
+
+  final UserRemoteDataSource authRemoteDataSource;
+  final UserLocalDataSource authLocalDataSource;
+
+  UserRepositoryImpl({
+    required this.authRemoteDataSource,
+    required this.authLocalDataSource,
+  });
+
+  @override
+  Future<void> addOrUpdateUser({required UserEntity? user}) async {
+    await authLocalDataSource.addOrUpdateUser(user);
+  }
+
+  @override
+  Future<Response?> auth({
+    required String email,
+    required String uid,
+    required String fullName,
+    required String fcmToken,
+  }) {
+    return authRemoteDataSource.auth(
+      email: email,
+      uid: uid,
+      fullName: fullName,
+      fcmToken: fcmToken,
+    );
+  }
+
+}
