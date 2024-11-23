@@ -34,4 +34,25 @@ class UserRepositoryImpl implements UserRepository{
     );
   }
 
+  @override
+  Future<Response?> addDevice({
+    required String email,
+    required String token,
+  }) async {
+    return await authRemoteDataSource.addDevice(
+      email: email,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response?> deleteDevice({
+    required String email,
+    required String deviceId,
+  }) async {
+    return await authRemoteDataSource.deleteDevice(
+      email: email,
+      deviceId: deviceId,
+    );
+  }
 }

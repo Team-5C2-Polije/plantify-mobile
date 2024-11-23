@@ -13,4 +13,14 @@ abstract class UserRepository {
     required String fullName,
     required String fcmToken,
   });
+
+  Future<Response?> addDevice({
+    required String email,
+    required String token,
+  });
+
+  Future<Response?> deleteDevice({
+    required String email,
+    required String deviceId,
+  });
 }

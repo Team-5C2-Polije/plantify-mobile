@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:tomato_leaf/core/utils/fcm_token_service.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
 import 'package:tomato_leaf/data/models/user/user_model.dart';
-import 'package:tomato_leaf/domain/usecases/add_or_update_user_usecase.dart';
-import 'package:tomato_leaf/domain/usecases/auth_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/add_or_update_user_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/auth_usecase.dart';
 import 'package:tomato_leaf/feature/utils/presentation/dashboard/dashboard_page.dart';
 
 class AuthController extends GetxController {
