@@ -7,6 +7,10 @@ import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_p
 import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_binding.dart';
 import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_page.dart';
+import 'package:tomato_leaf/feature/device/presentation/watering_history/watering_history_binding.dart';
+import 'package:tomato_leaf/feature/device/presentation/watering_history/watering_history_page.dart';
+import 'package:tomato_leaf/feature/device/presentation/watering_manually/watering_manually_binding.dart';
+import 'package:tomato_leaf/feature/device/presentation/watering_manually/watering_manually_page.dart';
 import 'package:tomato_leaf/feature/profile/presentation/notification/notification_binding.dart';
 import 'package:tomato_leaf/feature/profile/presentation/notification/notification_page.dart';
 import 'package:tomato_leaf/feature/profile/presentation/profile/profile_binding.dart';
@@ -19,10 +23,6 @@ import 'package:tomato_leaf/feature/sensor/presentation/light_intensity/light_in
 import 'package:tomato_leaf/feature/sensor/presentation/light_intensity/light_intensity_page.dart';
 import 'package:tomato_leaf/feature/sensor/presentation/volume/volume_binding.dart';
 import 'package:tomato_leaf/feature/sensor/presentation/volume/volume_page.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_history/watering_history_binding.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_history/watering_history_page.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_manually/watering_manually_binding.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_manually/watering_manually_page.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_binding.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_page.dart';
 import 'package:tomato_leaf/feature/utils/presentation/dashboard/dashboard_binding.dart';

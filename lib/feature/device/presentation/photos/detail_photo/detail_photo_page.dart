@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tomato_leaf/core/styles/app_colors.dart';
-import 'package:tomato_leaf/core/widgets/device_page.dart';
-import 'package:tomato_leaf/feature/device/presentation/components/item_feature.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_manually/watering_manually_page.dart';
 
 class DetailPhotoPage extends StatelessWidget {
   static String routeName = '/detail_photo';

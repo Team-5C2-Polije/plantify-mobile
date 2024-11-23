@@ -5,8 +5,8 @@ import 'package:tomato_leaf/core/styles/app_colors.dart';
 import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:tomato_leaf/core/widgets/device_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tomato_leaf/feature/device/presentation/watering_history/watering_history_page.dart';
 import 'package:tomato_leaf/feature/schedule/presentation/create_schedule/create_schedule_page.dart';
-import 'package:tomato_leaf/feature/sensor/presentation/watering_history/watering_history_page.dart';
 
 class ListSchedulePage extends StatelessWidget {
   static String routeName = '/list_schedule';
