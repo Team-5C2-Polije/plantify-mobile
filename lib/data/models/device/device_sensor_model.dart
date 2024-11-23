@@ -24,10 +24,10 @@ class DeviceSensorModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'lightIntensity': lightIntensity,
-      'soilMoisture': soilMoisture,
-      'temperature': temperature,
-      'waterVol': waterVol,
+      'lightIntensity': lightIntensity ?? 0,
+      'soilMoisture': soilMoisture ?? 0,
+      'temperature': temperature ?? 0,
+      'waterVol': waterVol ?? 0,
     };
   }
 

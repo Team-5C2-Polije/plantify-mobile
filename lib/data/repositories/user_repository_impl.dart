@@ -1,8 +1,8 @@
-import 'package:dio/src/response.dart';
 import 'package:tomato_leaf/data/datasources/local/user_local_datasource.dart';
 import 'package:tomato_leaf/data/datasources/remote/user_remote_datasource.dart';
 import 'package:tomato_leaf/domain/entities/user/user_entity.dart';
 import 'package:tomato_leaf/domain/repositories/user_repository.dart';
+import 'package:dio/dio.dart';
 
 class UserRepositoryImpl implements UserRepository{
 
