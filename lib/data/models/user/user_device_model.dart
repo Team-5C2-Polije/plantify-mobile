@@ -12,11 +12,15 @@ class UserDeviceModel {
     this.name,
   });
 
-  factory UserDeviceModel.fromMapEntry(MapEntry<String, dynamic> entry) {
+  factory UserDeviceModel.fromMapEntry(MapEntry<String, dynamic> entry, {bool ignoreCreated = false}) {
+    final deviceData = entry.value;
+
     return UserDeviceModel(
       deviceId: entry.key,
-      createdAt: entry.value['createdAt'] != null ? DateTimeConverter.parseRFC1123(entry.value['createdAt']) : null,
-      name: entry.value['name'],
+      createdAt: ignoreCreated ? deviceData['createdAt'] != null
+          ? DateTimeConverter.parseRFC1123(deviceData['createdAt'])
+          : null : DateTime.now(),
+      name: deviceData['name'],
     );
   }
 

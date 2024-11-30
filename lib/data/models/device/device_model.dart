@@ -4,6 +4,7 @@ import 'package:tomato_leaf/data/models/device/device_sensor_model.dart';
 import 'package:tomato_leaf/domain/entities/device/device_entity.dart';
 
 class DeviceModel {
+  final String? deviceId;
   final DateTime? createdAt;
   final String? name;
   final List<DeviceScheduleModel>? schedules;
@@ -14,6 +15,7 @@ class DeviceModel {
   final int? totalSchedule;
 
   DeviceModel({
+    this.deviceId,
     this.createdAt,
     this.name,
     this.schedules,
@@ -26,6 +28,7 @@ class DeviceModel {
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) {
     return DeviceModel(
+      deviceId: json['deviceId'] as String?,
       createdAt: DateTimeConverter.parseRFC1123(json['createdAt'] as String?),
       name: json['name'] as String?,
       schedules: json['schedules'] != null
@@ -44,6 +47,7 @@ class DeviceModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'deviceId': deviceId,
       'createdAt': createdAt?.toUtc().toIso8601String(),
       'name': name,
       'schedules': {
@@ -59,6 +63,7 @@ class DeviceModel {
 
   static DeviceModel fromEntity(DeviceEntity entity) {
     return DeviceModel(
+      deviceId: entity.deviceId,
       createdAt: entity.createdAt,
       name: entity.name,
       schedules: entity.schedules?.map((schedule) => DeviceScheduleModel.fromEntity(schedule)).toList(),
@@ -72,6 +77,7 @@ class DeviceModel {
 
   DeviceEntity toEntity() {
     return DeviceEntity(
+      deviceId: deviceId,
       createdAt: createdAt,
       name: name,
       schedules: schedules?.map((schedule) => schedule.toEntity()).toList(),

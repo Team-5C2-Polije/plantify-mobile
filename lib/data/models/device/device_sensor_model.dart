@@ -1,10 +1,10 @@
 import 'package:tomato_leaf/domain/entities/device/device_sensor_entity.dart';
 
 class DeviceSensorModel {
-  final int? lightIntensity;
-  final int? soilMoisture;
-  final int? temperature;
-  final int? waterVol;
+  final num? lightIntensity;
+  final num? soilMoisture;
+  final num? temperature;
+  final num? waterVol;
 
   DeviceSensorModel({
     this.lightIntensity,
@@ -15,10 +15,10 @@ class DeviceSensorModel {
 
   factory DeviceSensorModel.fromJson(Map<String, dynamic> json) {
     return DeviceSensorModel(
-      lightIntensity: json['lightIntensity'] as int?,
-      soilMoisture: json['soilMoisture'] as int?,
-      temperature: json['temperature'] as int?,
-      waterVol: json['waterVol'] as int?,
+      lightIntensity: json['lightIntensity'] as num?,
+      soilMoisture: json['soilMoisture'] as num?,
+      temperature: json['temperature'] as num?,
+      waterVol: json['waterVol'] as num?,
     );
   }
 

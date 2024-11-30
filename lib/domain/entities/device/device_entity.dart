@@ -2,6 +2,7 @@ import 'package:tomato_leaf/domain/entities/device/device_schedule_entity.dart';
 import 'package:tomato_leaf/domain/entities/device/device_sensor_entity.dart';
 
 class DeviceEntity {
+  final String? deviceId;
   final DateTime? createdAt;
   final String? name;
   final List<DeviceScheduleEntity>? schedules;
@@ -12,6 +13,7 @@ class DeviceEntity {
   final int? totalSchedule;
 
   DeviceEntity({
+    this.deviceId,
     this.createdAt,
     this.name,
     this.schedules,

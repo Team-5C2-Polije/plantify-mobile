@@ -21,4 +21,22 @@ class UserEntity {
     this.updatedAt,
     this.devices,
   });
+
+  UserEntity copyWith({
+    String? email,
+    String? fcmToken,
+    String? fullname,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<UserDeviceEntity>? devices,
+  }) {
+    return UserEntity(
+      email: email ?? this.email,
+      fcmToken: fcmToken ?? this.fcmToken,
+      fullname: fullname ?? this.fullname,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      devices: devices ?? this.devices,
+    );
+  }
 }

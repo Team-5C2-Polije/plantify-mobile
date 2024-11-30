@@ -1,8 +1,8 @@
 class DeviceSensorEntity {
-  final int? lightIntensity;
-  final int? soilMoisture;
-  final int? temperature;
-  final int? waterVol;
+  final num? lightIntensity;
+  final num? soilMoisture;
+  final num? temperature;
+  final num? waterVol;
 
   DeviceSensorEntity({
     this.lightIntensity,
