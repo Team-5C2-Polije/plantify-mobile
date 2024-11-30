@@ -69,12 +69,26 @@ class DashboardController extends GetxController {
     return [];
   }
 
-  Future<void> goToUpdateDevice({
-    bool mode = false,
-  }) async {
+  Future<void> goToUpdateDeviceAddMode() async {
     try {
       await Get.toNamed(UpdateDevicePage.routeName.toString(), arguments: {
-        "isModeEdit": mode,
+        "isModeEdit": false,
+      });
+      await fetchData();
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, 'updateDevice');
+    }
+  }
+
+  Future<void> goToUpdateDeviceEditMode({
+    required int index,
+  }) async {
+    var device = myDevices[index];
+    try {
+      await Get.toNamed(UpdateDevicePage.routeName.toString(), arguments: {
+        "isModeEdit": true,
+        "deviceId": device.deviceId,
+        "deviceName": device.name,
       });
       await fetchData();
     } catch (ex, s) {

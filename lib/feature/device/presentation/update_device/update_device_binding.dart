@@ -41,7 +41,7 @@ class UpdateDeviceBinding extends Bindings {
       addOrUpdateUserUseCase: Get.find<AddOrUpdateUserUseCase>(),
       getCurrentLoginUseCase: Get.find<GetCurrentLoginUseCase>(),
       addUserDeviceUseCase: Get.find<AddUserDeviceUseCase>(),
-      updateDeviceController: Get.find<UpdateDeviceUseCase>(),
+      updateDeviceUseCase: Get.find<UpdateDeviceUseCase>(),
     ));
   }
 }

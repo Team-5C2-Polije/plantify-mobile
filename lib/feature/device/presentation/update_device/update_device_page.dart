@@ -13,7 +13,6 @@ class UpdateDevicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UpdateDeviceController controller = Get.find();
-    TextEditingController textController = TextEditingController(text:'');
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -32,7 +31,9 @@ class UpdateDevicePage extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    controller.isModeEdit.value ? "Update Device" : "Tambah Device",
+                    controller.isModeEdit.value
+                        ? "Update Device"
+                        : "Tambah Device",
                     style: GoogleFonts.poppins(
                       fontSize: 17,
                       fontWeight: FontWeight.normal,
@@ -53,7 +54,9 @@ class UpdateDevicePage extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        controller.isModeEdit.value ? "Nama Device" : "Token Device",
+                        controller.isModeEdit.value
+                            ? "Nama Device"
+                            : "Token Device",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -62,7 +65,7 @@ class UpdateDevicePage extends StatelessWidget {
                       SizedBox(width: 10.w),
                       Expanded(
                         child: TextField(
-                          controller: textController,
+                          controller: controller.textController,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -77,7 +80,7 @@ class UpdateDevicePage extends StatelessWidget {
               SizedBox(height: 20.h),
               GestureDetector(
                 onTap: () async {
-                  controller.action(textController.text);
+                  controller.action(controller.textController.text);
                 },
                 child: Align(
                   alignment: Alignment.centerRight,
