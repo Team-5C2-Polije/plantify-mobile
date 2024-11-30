@@ -3,7 +3,7 @@ class ApiConstant {
   // auth
   static const String authEndpoint = 'auth';
   static const String addUserDeviceEndpoint = 'add_device';
-  static const String deleteUserDeviceEndpoint = 'delete_device';
+  static const String deleteUserDeviceEndpoint = 'del_device';
   // device
   static const String createDeviceEndpoint = 'device/create_device';
   static const String updateDeviceEndpoint = 'device/update_device';
