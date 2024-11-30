@@ -20,4 +20,43 @@ class UserLocalDataSource{
       LogPrint.exception(ex, s, this, 'addOrUpdateUser');
     }
   }
+
+  Future<bool> isLogin() async {
+    try{
+      return await isar.userEntitys.count() >= 1;
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'isLogin');
+    }
+    return false;
+  }
+
+  Future<bool> logoutFromLocal() async {
+    try{
+      await isar.writeTxn(() async {
+        await isar.userEntitys.clear();
+      });
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'logoutFromLocal');
+    }
+    return false;
+  }
+
+  Future<List<String>?> getDeviceIds() async {
+    try{
+      final user = await isar.userEntitys.where().findFirst();
+      return user?.devices?.map((e) => e.deviceId ?? '').toList() ?? [];
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'getDeviceIds');
+    }
+    return [];
+  }
+
+  Future<UserEntity?> getCurrentLogin() async {
+    try{
+      return await isar.userEntitys.where().findFirst();
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'getCurrentLogin');
+    }
+    return null;
+  }
 }

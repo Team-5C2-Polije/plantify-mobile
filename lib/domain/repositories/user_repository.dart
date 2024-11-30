@@ -23,4 +23,12 @@ abstract class UserRepository {
     required String email,
     required String deviceId,
   });
+
+  Future<bool> isLogin();
+
+  Future<bool> logoutFromLocal();
+
+  Future<List<String>?> getDeviceIds();
+
+  Future<UserEntity?> getCurrentLogin();
 }

@@ -55,4 +55,24 @@ class UserRepositoryImpl implements UserRepository{
       deviceId: deviceId,
     );
   }
+
+  @override
+  Future<List<String>?> getDeviceIds() async{
+    return await authLocalDataSource.getDeviceIds();
+  }
+
+  @override
+  Future<bool> isLogin() async{
+    return await authLocalDataSource.isLogin();
+  }
+
+  @override
+  Future<bool> logoutFromLocal() async{
+    return await authLocalDataSource.logoutFromLocal();
+  }
+
+  @override
+  Future<UserEntity?> getCurrentLogin() async {
+    return await authLocalDataSource.getCurrentLogin();
+  }
 }
