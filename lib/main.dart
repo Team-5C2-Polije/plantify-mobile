@@ -29,6 +29,10 @@ import 'package:tomato_leaf/domain/usecases/user/add_or_update_user_usecase.dart
 import 'package:tomato_leaf/domain/usecases/user/add_user_device_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/user/auth_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/user/delete_user_device_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/get_current_login_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/get_device_ids_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/is_login_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/logout_from_local_usecase.dart';
 import 'package:tomato_leaf/feature/utils/presentation/splash_screen/splash_screen_page.dart';
 
 import 'firebase_options.dart';
@@ -53,8 +57,12 @@ void main() async {
   Get.lazyPut<AuthUseCase>(() => AuthUseCase(Get.find<UserRepository>()));
   Get.lazyPut<AddOrUpdateUserUseCase>(() => AddOrUpdateUserUseCase(Get.find<UserRepository>()));
   Get.lazyPut<AddUserDeviceUseCase>(() => AddUserDeviceUseCase(Get.find<UserRepository>()));
-  Get.lazyPut<DeleteUserDeviceUseCase>(() => DeleteUserDeviceUseCase(Get.find<UserRepository>()));
+  Get.lazyPut<IsLoginUseCase>(() => IsLoginUseCase(Get.find<UserRepository>()));
+  Get.lazyPut<LogoutFromLocalUseCase>(() => LogoutFromLocalUseCase(Get.find<UserRepository>()));
+  Get.lazyPut<GetDeviceIdsUseCase>(() => GetDeviceIdsUseCase(Get.find<UserRepository>()));
+  Get.lazyPut<GetCurrentLoginUseCase>(() => GetCurrentLoginUseCase(Get.find<UserRepository>()));
 
+  // device
   Get.lazyPut<DeviceLocalDataSource>(() => DeviceLocalDataSource());
   Get.lazyPut<DeviceRemoteDataSource>(() => DeviceRemoteDataSource());
   Get.lazyPut<DeviceRepository>(() => DeviceRepositoryImpl(

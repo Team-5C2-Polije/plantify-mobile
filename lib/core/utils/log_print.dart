@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:logger/logger.dart';
 
 class LogPrint {
@@ -41,36 +43,42 @@ class LogPrint {
   // Override the print function
   static void print(String message) {
     if (_isLoggingEnabled) {
+      log(message);
       _loggerNoStack.i(message);
     }
   }
 
   static void debug(String message) {
     if (_isLoggingEnabled) {
+      log(message);
       _logger.d(message);
     }
   }
 
   static void info(String message) {
     if (_isLoggingEnabled) {
+      log(message);
       _loggerNoStack.i(message);
     }
   }
 
   static void warn(String message) {
     if (_isLoggingEnabled) {
+      log(message);
       _loggerNoStack.w(message);
     }
   }
 
   static void error(String message, {dynamic error}) {
     if (_isLoggingEnabled) {
+      log(message);
       _logger.e(message, error: error);
     }
   }
 
   static void trace(dynamic message) {
     if (_isLoggingEnabled) {
+      log(message);
       _loggerNoStack.t(message);
     }
   }
@@ -79,6 +87,7 @@ class LogPrint {
       [String? methodName = '']) {
     String className = caller.runtimeType.toString();
 
+    log('Exception at $className-$methodName: $exception, $stackTrace');
     LogPrint.error(
       'Exception at $className-$methodName: $exception, $stackTrace',
     );
