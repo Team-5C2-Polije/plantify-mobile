@@ -17,9 +17,8 @@ class CreateSchedulePage extends StatelessWidget {
         pageTitle: 'Buat Jadwal',
         deviceName: 'Device Name',
         photo: 'assets/images/img-device.png',
-        indicator: '(-20 / 50)',
-        lastWatering: '07:00',
-        nextWatering: '15:00',
+        token: '(-20 / 50)',
+        updatedAt: '15:00',
         space: 5,
         child: Column(
           children: [

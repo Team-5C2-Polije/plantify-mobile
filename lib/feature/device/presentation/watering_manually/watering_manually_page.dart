@@ -19,9 +19,8 @@ class WateringManuallyPage extends StatelessWidget {
           pageTitle: 'Penyiraman Manual',
           deviceName: 'Device Name',
           photo: 'assets/images/img-device.png',
-          indicator: '(-20 / 50)',
-          lastWatering: '07:00',
-          nextWatering: '15:00',
+          token: '(-20 / 50)',
+          updatedAt: '15:00',
           space: 50.h,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

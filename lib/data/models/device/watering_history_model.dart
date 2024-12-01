@@ -1,14 +1,15 @@
+import 'package:tomato_leaf/core/utils/datetime_converter.dart';
 import 'package:tomato_leaf/domain/entities/device/watering_history_entity.dart';
 
 class WateringHistoryModel {
-  final String? createdAt;
+  final DateTime? createdAt;
   final String? id;
   final bool? isManually;
-  final int? lightIntensity;
   final String? schedule;
-  final int? soilMoisture;
-  final int? temperature;
-  final int? waterVol;
+  final num? lightIntensity;
+  final num? soilMoisture;
+  final num? temperature;
+  final num? waterVol;
 
   WateringHistoryModel({
     this.createdAt,
@@ -23,14 +24,14 @@ class WateringHistoryModel {
 
   factory WateringHistoryModel.fromJson(Map<String, dynamic> json) {
     return WateringHistoryModel(
-      createdAt: json['createdAt'] as String?,
+      createdAt: DateTimeConverter.parseRFC1123(json['createdAt'] as String?),
       id: json['id'] as String?,
       isManually: json['isManually'] as bool?,
-      lightIntensity: json['lightIntensity'] as int?,
       schedule: json['schedule'] as String?,
-      soilMoisture: json['soilMoisture'] as int?,
-      temperature: json['temperature'] as int?,
-      waterVol: json['waterVol'] as int?,
+      lightIntensity: json['lightIntensity'] as num?,
+      soilMoisture: json['soilMoisture'] as num?,
+      temperature: json['temperature'] as num?,
+      waterVol: json['waterVol'] as num?,
     );
   }
 
@@ -49,11 +50,11 @@ class WateringHistoryModel {
 
   WateringHistoryEntity toEntity() {
     return WateringHistoryEntity(
-      createdAt: createdAt != null ? DateTime.tryParse(createdAt!) : null,
+      createdAt: createdAt,
       id: id,
       isManually: isManually,
-      lightIntensity: lightIntensity,
       schedule: schedule,
+      lightIntensity: lightIntensity,
       soilMoisture: soilMoisture,
       temperature: temperature,
       waterVol: waterVol,
@@ -62,7 +63,7 @@ class WateringHistoryModel {
 
   static WateringHistoryModel fromEntity(WateringHistoryEntity entity) {
     return WateringHistoryModel(
-      createdAt: entity.createdAt?.toIso8601String(),
+      createdAt: entity.createdAt,
       id: entity.id,
       isManually: entity.isManually,
       lightIntensity: entity.lightIntensity,

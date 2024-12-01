@@ -18,9 +18,8 @@ class VolumePage extends StatelessWidget {
         pageTitle: 'Intensitas Cahaya',
         deviceName: 'Device Name',
         photo: 'assets/images/img-device.png',
-        indicator: '(-20 / 50)',
-        lastWatering: '07:00',
-        nextWatering: '15:00',
+        token: '(-20 / 50)',
+        updatedAt: '15:00',
         child: ItemFeature(
           imagePath: 'assets/icons/ic-water-blue.svg',
           title: 'Volume Air',

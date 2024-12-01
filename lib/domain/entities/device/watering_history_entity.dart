@@ -2,11 +2,11 @@ class WateringHistoryEntity {
   final DateTime? createdAt;
   final String? id;
   final bool? isManually;
-  final int? lightIntensity;
   final String? schedule;
-  final int? soilMoisture;
-  final int? temperature;
-  final int? waterVol;
+  final num? lightIntensity;
+  final num? soilMoisture;
+  final num? temperature;
+  final num? waterVol;
 
   WateringHistoryEntity({
     this.createdAt,

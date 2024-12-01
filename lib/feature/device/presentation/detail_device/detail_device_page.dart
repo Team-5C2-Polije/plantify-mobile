@@ -6,7 +6,6 @@ import 'package:tomato_leaf/core/widgets/device_top.dart';
 import 'package:tomato_leaf/feature/device/presentation/components/item_feature.dart';
 import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_controller.dart';
 import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_page.dart';
-import 'package:tomato_leaf/feature/schedule/presentation/list_schedule/list_schedule_page.dart';
 
 class DetailDevicePage extends StatelessWidget {
   static String routeName = '/detail_device_page';
@@ -38,9 +37,8 @@ class DetailDevicePage extends StatelessWidget {
                 return DeviceTop(
                   deviceName: '${controller.deviceDetail.value.name}',
                   photo: 'assets/images/img-device.png',
-                  indicator: '${controller.deviceDetail.value.token}',
-                  lastWatering: '07:00',
-                  nextWatering: '${controller.updatedAt}',
+                  token: '${controller.deviceDetail.value.token}',
+                  updatedAt: '${controller.updatedAt}',
                 );
               }),
               SizedBox(height: 50.h),
@@ -106,7 +104,7 @@ class DetailDevicePage extends StatelessWidget {
                       value: "${controller.deviceDetail.value.totalHistory ??
                           0}",
                       onTap: () {
-                        Get.toNamed(ListSchedulePage.routeName.toString());
+                        controller.goToWateringHistory();
                       },
                     );
                   }),

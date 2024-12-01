@@ -6,18 +6,16 @@ import '../styles/app_colors.dart';
 class DeviceTop extends StatelessWidget {
   const DeviceTop({
     super.key,
-    required this.deviceName,
-    required this.photo,
-    required this.indicator,
-    required this.lastWatering,
-    required this.nextWatering,
+    this.deviceName,
+    this.photo,
+    this.token,
+    this.updatedAt,
   });
 
-  final String deviceName;
-  final String photo;
-  final String indicator;
-  final String lastWatering;
-  final String nextWatering;
+  final String? deviceName;
+  final String? photo;
+  final String? token;
+  final String? updatedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class DeviceTop extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  child: Image.asset(photo),
+                  child: Image.asset(photo ?? ''),
                 ),
               ),
             ),
@@ -62,7 +60,7 @@ class DeviceTop extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        deviceName,
+                        deviceName ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.leagueSpartan(
@@ -73,7 +71,7 @@ class DeviceTop extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "indikator $indicator",
+                        "indikator $token",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.leagueSpartan(
@@ -92,7 +90,7 @@ class DeviceTop extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        nextWatering,
+                        updatedAt ?? '',
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: Colors.black,

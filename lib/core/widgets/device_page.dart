@@ -7,22 +7,20 @@ class PageTitle extends StatelessWidget {
   const PageTitle({
     super.key,
     required this.pageTitle,
-    required this.deviceName,
-    required this.photo,
-    required this.indicator,
-    required this.lastWatering,
-    required this.nextWatering,
+    this.deviceName,
+    this.photo,
+    this.token,
+    this.updatedAt,
     required this.child,
     this.space = 50,
     this.padding = const EdgeInsets.fromLTRB(25, 40, 25, 0),
   });
 
   final String pageTitle;
-  final String deviceName;
-  final String photo;
-  final String indicator;
-  final String lastWatering;
-  final String nextWatering;
+  final String? deviceName;
+  final String? photo;
+  final String? token;
+  final String? updatedAt;
   final Widget child;
   final double space;
   final EdgeInsets padding;
@@ -46,9 +44,8 @@ class PageTitle extends StatelessWidget {
           DeviceTop(
             deviceName: deviceName,
             photo: photo,
-            indicator: indicator,
-            lastWatering: lastWatering,
-            nextWatering: nextWatering,
+            token: token,
+            updatedAt: updatedAt,
           ),
           SizedBox(height: space.h),
           child,
