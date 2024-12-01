@@ -9,6 +9,7 @@ import 'package:tomato_leaf/domain/entities/device/device_entity.dart';
 import 'package:tomato_leaf/domain/usecases/device/detail_device_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/device/get_sensor_value_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/device/get_updated_at_usecase.dart';
+import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/watering_history/watering_history_page.dart';
 
 class DetailDeviceController extends GetxController {
@@ -109,6 +110,13 @@ class DetailDeviceController extends GetxController {
   Future<void> goToWateringHistory() async {
     Get.toNamed(
       WateringHistoryPage.routeName.toString(),
+      arguments: deviceId.value,
+    );
+  }
+
+  Future<void> goToPhotoList() async {
+    Get.toNamed(
+      ListPhotoPage.routeName.toString(),
       arguments: deviceId.value,
     );
   }

@@ -114,7 +114,7 @@ class DetailDevicePage extends StatelessWidget {
                       title: "Total Foto",
                       value: "${controller.deviceDetail.value.totalPhoto ?? 0}",
                       onTap: () {
-                        Get.toNamed(ListPhotoPage.routeName.toString());
+                        controller.goToPhotoList();
                       },
                     );
                   }),
