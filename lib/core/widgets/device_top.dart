@@ -63,6 +63,8 @@ class DeviceTop extends StatelessWidget {
                     children: [
                       Text(
                         deviceName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.leagueSpartan(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -72,14 +74,16 @@ class DeviceTop extends StatelessWidget {
                       ),
                       Text(
                         "indikator $indicator",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.leagueSpartan(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: Colors.black,
                         ),
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        "Penyiraman Terakhir       : $lastWatering",
+                        "Terakhir Diupdate : ",
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: Colors.black,
@@ -88,11 +92,11 @@ class DeviceTop extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Penyiraman Selanjutnya : $nextWatering",
+                        nextWatering,
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: Colors.black,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           height: 1.15,
                         ),
                       ),

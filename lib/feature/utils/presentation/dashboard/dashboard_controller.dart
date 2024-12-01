@@ -13,6 +13,7 @@ import 'package:tomato_leaf/domain/usecases/user/add_or_update_user_usecase.dart
 import 'package:tomato_leaf/domain/usecases/user/delete_user_device_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/user/get_current_login_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/user/get_device_ids_usecase.dart';
+import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_page.dart';
 
 class DashboardController extends GetxController {
@@ -96,9 +97,23 @@ class DashboardController extends GetxController {
     }
   }
 
+  Future<void> goToDetailDevice({
+    required int index,
+  }) async {
+    var device = myDevices[index];
+    try {
+      await Get.toNamed(
+        DetailDevicePage.routeName.toString(),
+        arguments: device.deviceId,
+      );
+      await fetchData();
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, 'updateDevice');
+    }
+  }
+
   Future<void> deleteDevice(int index) async {
     try {
-
       String deviceId = myDevices[index].deviceId ?? '';
 
       final response = await deleteUserDeviceUseCase.call(

@@ -119,8 +119,7 @@ class DashboardPage extends StatelessWidget {
                             var device = controller.myDevices[index];
                             return GestureDetector(
                               onTap: () async {
-                                Get.toNamed(
-                                    DetailDevicePage.routeName.toString());
+                                controller.goToDetailDevice(index: index);
                               },
                               child: Padding(
                                 padding: EdgeInsets.only(bottom: 10.h),

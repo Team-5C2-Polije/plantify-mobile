@@ -1,5 +1,97 @@
-import 'package:get/get.dart';
+import 'dart:async';
+import 'dart:io';
 
-class DetailDeviceController extends GetxController{
-  //
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:tomato_leaf/core/utils/log_print.dart';
+import 'package:tomato_leaf/data/models/device/device_model.dart';
+import 'package:tomato_leaf/domain/entities/device/device_entity.dart';
+import 'package:tomato_leaf/domain/usecases/device/detail_device_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/device/get_sensor_value_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/device/get_updated_at_usecase.dart';
+
+class DetailDeviceController extends GetxController {
+  final DetailDeviceUseCase detailDeviceUseCase;
+  final GetSensorValueUseCase getSensorValueUseCase;
+  final GetUpdatedAtUseCase getUpdatedAtUseCase;
+
+  var deviceId = ''.obs;
+  var lightIntensity = 0.obs;
+  var waterVol = 0.obs;
+  var temperature = 0.obs;
+  var soilMoisture = 0.obs;
+  var updatedAt = ''.obs;
+  var deviceDetail = DeviceEntity().obs;
+  late StreamSubscription<int> _subLightIntensity;
+  late StreamSubscription<int> _subVolume;
+  late StreamSubscription<int> _subTemperature;
+  late StreamSubscription<int> _subSoilMoisture;
+  late StreamSubscription<String> _subUpdatedAt;
+
+  DetailDeviceController({
+    required this.detailDeviceUseCase,
+    required this.getSensorValueUseCase,
+    required this.getUpdatedAtUseCase,
+  });
+
+  @override
+  void onInit() async {
+    super.onInit();
+    deviceId.value = Get.arguments ?? '';
+    await getDetailDevice();
+    // lightIntensity sensor
+    _subLightIntensity = getSensorValueUseCase(deviceId: deviceId.value, data: 'lightIntensity').listen((value) {
+      lightIntensity.value = value;
+      LogPrint.debug("~device getSensorValueUseCase-lightIntensity : $value");
+    });
+
+    // water volume
+    _subVolume = getSensorValueUseCase(deviceId: deviceId.value, data: 'waterVol').listen((value) {
+      waterVol.value = value;
+      LogPrint.debug("~device getSensorValueUseCase-waterVol : $value");
+    });
+
+    // temperature
+    _subTemperature = getSensorValueUseCase(deviceId: deviceId.value, data: 'temperature').listen((value) {
+      temperature.value = value;
+      LogPrint.debug("~device getSensorValueUseCase-temperature : $value");
+    });
+
+    // soil moisture
+    _subSoilMoisture = getSensorValueUseCase(deviceId: deviceId.value, data: 'soilMoisture').listen((value) {
+      soilMoisture.value = value;
+      LogPrint.debug("~device getSensorValueUseCase-soilMoisture : $value");
+    });
+    
+    // updated at
+    _subUpdatedAt = getUpdatedAtUseCase(deviceId: deviceId.value).listen((value) {
+      updatedAt.value = value;
+      LogPrint.debug("~device getUpadatedAt : $value");
+    });
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    _subLightIntensity.cancel();
+    _subVolume.cancel();
+    _subSoilMoisture.cancel();
+    _subTemperature.cancel();
+    _subUpdatedAt.cancel();
+  }
+
+  Future<void> getDetailDevice() async {
+    try{
+      final response = await detailDeviceUseCase(deviceId: deviceId.value);
+      Map<String, dynamic> payload = response?.data;
+
+      if(response?.statusCode == HttpStatus.ok){
+        deviceDetail.value = DeviceModel.fromJson(payload['data']).toEntity();
+      }else{
+        Fluttertoast.showToast(msg: "Gagal mendapatakan data Device : ${payload['message']}");
+      }
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'getDetailDevice');
+    }
+  }
 }

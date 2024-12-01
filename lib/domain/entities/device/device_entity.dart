@@ -10,7 +10,7 @@ class DeviceEntity {
   final String? token;
   final DateTime? updatedAt;
   final int? totalPhoto;
-  final int? totalSchedule;
+  final int? totalHistory;
 
   DeviceEntity({
     this.deviceId,
@@ -21,6 +21,6 @@ class DeviceEntity {
     this.token,
     this.updatedAt,
     this.totalPhoto,
-    this.totalSchedule,
+    this.totalHistory,
   });
 }

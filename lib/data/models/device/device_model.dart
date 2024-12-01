@@ -12,7 +12,7 @@ class DeviceModel {
   final String? token;
   final DateTime? updatedAt;
   final int? totalPhoto;
-  final int? totalSchedule;
+  final int? totalHistory;
 
   DeviceModel({
     this.deviceId,
@@ -23,7 +23,7 @@ class DeviceModel {
     this.token,
     this.updatedAt,
     this.totalPhoto,
-    this.totalSchedule,
+    this.totalHistory,
   });
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) {
@@ -41,7 +41,7 @@ class DeviceModel {
       token: json['token'] as String?,
       updatedAt: DateTimeConverter.parseRFC1123(json['updatedAt'] as String?),
       totalPhoto: json['total_photo'] as int?,
-      totalSchedule: json['total_schedule'] as int?,
+      totalHistory: json['total_history'] as int?,
     );
   }
 
@@ -57,7 +57,7 @@ class DeviceModel {
       'token': token,
       'updatedAt': updatedAt?.toUtc().toIso8601String(),
       'total_photo': totalPhoto,
-      'total_schedule': totalSchedule,
+      'total_history': totalHistory,
     };
   }
 
@@ -71,7 +71,7 @@ class DeviceModel {
       token: entity.token,
       updatedAt: entity.updatedAt,
       totalPhoto: entity.totalPhoto,
-      totalSchedule: entity.totalSchedule,
+      totalHistory: entity.totalHistory,
     );
   }
 
@@ -85,7 +85,7 @@ class DeviceModel {
       token: token,
       updatedAt: updatedAt,
       totalPhoto: totalPhoto,
-      totalSchedule: totalSchedule,
+      totalHistory: totalHistory,
     );
   }
 
