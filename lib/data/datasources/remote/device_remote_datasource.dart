@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:tomato_leaf/core/services/dio_service.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:tomato_leaf/core/utils/api_constant.dart';
+import 'package:tomato_leaf/core/utils/datetime_converter.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
 
 class DeviceRemoteDataSource {
@@ -174,4 +176,46 @@ class DeviceRemoteDataSource {
       return null;
     }
   }
+
+  Stream<int> getSensorValue({required String deviceId, required String data}) {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      return firestore
+          .collection('devices')
+          .doc(deviceId)
+          .snapshots()
+          .map((snapshot) {
+        if (snapshot.exists) {
+          return snapshot.data()?['sensors'][data] ?? 0;
+        }
+        return 0;
+      });
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, '');
+      return Stream.value(0);
+    }
+  }
+
+  Stream<String> getUpdatedAt({required String deviceId}) {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      return firestore
+          .collection('devices')
+          .doc(deviceId)
+          .snapshots()
+          .map((snapshot) {
+        if (snapshot.exists) {
+          Timestamp? updateAtTimeStamp = snapshot.data()?['updatedAt'];
+          if(updateAtTimeStamp != null){
+            DateTimeConverter.toUpdatedAtStyle(updateAtTimeStamp.toDate()) ?? 'NULL';
+          }
+        }
+        return DateTimeConverter.toUpdatedAtStyle(DateTime.now()) ?? 'NULL';
+      });
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, '');
+      return Stream.value(DateTimeConverter.toUpdatedAtStyle(DateTime.now()) ?? 'NULL');
+    }
+  }
+
 }

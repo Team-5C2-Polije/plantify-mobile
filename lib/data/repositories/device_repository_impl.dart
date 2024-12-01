@@ -117,4 +117,20 @@ class DeviceRepositoryImpl implements DeviceRepository {
       status: status,
     );
   }
+
+  @override
+  Stream<int> getSensorValue({
+    required String deviceId,
+    required String data,
+  }) {
+    return deviceRemoteDataSource.getSensorValue(
+      deviceId: deviceId,
+      data: data,
+    );
+  }
+
+  @override
+  Stream<String> getUpdatedAt({required String deviceId}) {
+    return deviceRemoteDataSource.getUpdatedAt(deviceId: deviceId);
+  }
 }
