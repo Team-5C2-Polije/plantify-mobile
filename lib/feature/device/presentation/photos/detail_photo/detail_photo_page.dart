@@ -65,6 +65,7 @@ class DetailPhotoPage extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
+              controller.currentPhoto.value.predictions?.isNotEmpty == false ?
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -95,6 +96,7 @@ class DetailPhotoPage extends StatelessWidget {
                   );
                 },
               )
+              : Container()
             ],
           ),
         ),

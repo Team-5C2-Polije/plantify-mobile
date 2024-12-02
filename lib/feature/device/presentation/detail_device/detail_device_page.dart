@@ -100,7 +100,7 @@ class DetailDevicePage extends StatelessWidget {
                   Obx(() {
                     return ItemFeature(
                       imagePath: 'assets/icons/ic-plant.svg',
-                      title: "Jadwal Penyiraman",
+                      title: "Histori Penyiraman",
                       value: "${controller.deviceDetail.value.totalHistory ??
                           0}",
                       onTap: () {
