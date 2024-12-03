@@ -15,7 +15,11 @@ class DetailPhotoController extends GetxController {
   PhotoArgument? photoArgument;
   var deviceId = ''.obs;
   var photos = <PhotoEntity>[].obs;
+  // Properti lainnya tetap seperti semula
   var index = 0.obs;
+
+  // Getter untuk nilai index ditambah 1
+  int get displayIndex => index.value + 1;
   var currentPhoto = PhotoEntity().obs;
 
   DetailPhotoController({
@@ -37,20 +41,55 @@ class DetailPhotoController extends GetxController {
   Future<void> getDetailPhoto() async {
     try {
       String photoId = photos[index.value].id ?? '';
+      if (photoId.isEmpty) {
+        Fluttertoast.showToast(msg: "Photo ID is missing");
+        return;
+      }
+
       final response = await getDetailPhotoUseCase(
         deviceId: deviceId.value,
         photoId: photoId,
       );
 
-      Map<String, dynamic> payload = response?.data;
+      Map<String, dynamic>? payload = response?.data;
 
-      if (response?.statusCode == HttpStatus.ok) {
+      if (response?.statusCode == HttpStatus.ok && payload != null) {
         currentPhoto.value = PhotoModel.fromJson(payload['data']).toEntity();
       } else {
-        Fluttertoast.showToast(msg: "Failure get data : ${payload['message']}");
+        Fluttertoast.showToast(
+          msg: "Failed to get data: ${payload?['message'] ?? 'Unknown error'}",
+        );
       }
     } catch (ex, s) {
-      LogPrint.exception(ex, s, this, 'getDetailPhotos');
+      LogPrint.exception(ex, s, this, 'getDetailPhoto');
+    }
+  }
+
+  Future<void> tapRight() async {
+    try{
+      if (index.value >= photos.length - 1) {
+        return;
+      } else {
+        index.value++;
+      }
+      await getDetailPhoto();
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'tapRight');
+    }
+  }
+
+  Future<void> tapLeft() async {
+    try{
+      if (index.value <= 0) {
+        index.value = 0;
+        return;
+      } else {
+        index.value--;
+      }
+
+      await getDetailPhoto();
+    }catch(ex, s){
+      LogPrint.exception(ex, s, this, 'tapLeft');
     }
   }
 }

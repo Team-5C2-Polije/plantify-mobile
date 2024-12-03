@@ -65,38 +65,40 @@ class DetailPhotoPage extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              controller.currentPhoto.value.predictions?.isNotEmpty == false ?
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.currentPhoto.value.predictions?.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.black),
-                        borderRadius: const BorderRadius.all(Radius.circular(10))
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("No : ${++index}"),
-                            Text("X : 10"),
-                            Text("Y : 10"),
-                            Text("Height : 10"),
-                            Text("Width : 10"),
-                            Text("Class : 10"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              )
-              : Container()
+              controller.currentPhoto.value.predictions?.isNotEmpty == false
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          controller.currentPhoto.value.predictions?.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 1, color: Colors.black),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("No : ${++index}"),
+                                  Text("X : 10"),
+                                  Text("Y : 10"),
+                                  Text("Height : 10"),
+                                  Text("Width : 10"),
+                                  Text("Class : 10"),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  : Container()
             ],
           ),
         ),
@@ -110,23 +112,28 @@ class DetailPhotoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(width: 16.w),
-              Container(
-                width: 80.w,
-                height: 60.h,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.arrow_left_outlined,
-                  size: 40.w,
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () async {
+                  await controller.tapLeft();
+                },
+                child: Container(
+                  width: 80.w,
+                  height: 60.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.arrow_left_outlined,
+                    size: 40.w,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Obx(() {
                 return Text(
-                  "${++controller.index}/${controller.photos.length}",
+                  "${controller.displayIndex}/${controller.photos.length}",
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -134,18 +141,23 @@ class DetailPhotoPage extends StatelessWidget {
                   ),
                 );
               }),
-              Container(
-                width: 80.w,
-                height: 60.h,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.arrow_right_outlined,
-                  size: 40.w,
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () async {
+                  await controller.tapRight();
+                },
+                child: Container(
+                  width: 80.w,
+                  height: 60.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.arrow_right_outlined,
+                    size: 40.w,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               SizedBox(width: 1.w),
