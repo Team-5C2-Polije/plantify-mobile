@@ -211,4 +211,12 @@ class AppSizes {
   static double marginTopAndBottom = 30.0;
 
   static double roundedCircularGlobal = sizeRoundedGlobal;
+
+  // Helper method untuk menghitung ukuran icon berdasarkan MediaQuery
+  static double _iconSizeWithMediaQuery(BuildContext context, double baseIconSize) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Menyesuaikan ukuran icon relatif terhadap lebar dasar 375px
+    return baseIconSize * (screenWidth / 375);
+  }
+  static double iconMedium(BuildContext context) => _iconSizeWithMediaQuery(context, 24);
 }

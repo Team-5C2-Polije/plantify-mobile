@@ -9,6 +9,8 @@ import 'package:tomato_leaf/domain/usecases/device/get_photos_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/device/get_updated_at_usecase.dart';
 import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_controller.dart';
 
+import '../../../../../domain/usecases/device/add_photo_usecase.dart';
+
 class ListPhotoBinding extends Bindings{
   @override
   void dependencies() {
@@ -22,11 +24,13 @@ class ListPhotoBinding extends Bindings{
     Get.lazyPut<GetHistoriesUseCase>(() => GetHistoriesUseCase(Get.find<DeviceRepository>()));
     Get.lazyPut<DetailDeviceUseCase>(() => DetailDeviceUseCase(Get.find<DeviceRepository>()));
     Get.lazyPut<GetPhotosUseCase>(() => GetPhotosUseCase(Get.find<DeviceRepository>()));
+    Get.lazyPut<AddPhotoUseCase>(() => AddPhotoUseCase(Get.find<DeviceRepository>()));
 
     Get.lazyPut(() => ListPhotoController(
       getUpdatedAtUseCase: Get.find<GetUpdatedAtUseCase>(),
       detailDeviceUseCase: Get.find<DetailDeviceUseCase>(),
       getPhotosUseCase: Get.find<GetPhotosUseCase>(),
+      addPhotoUseCase: Get.find<AddPhotoUseCase>(),
     ));
   }
 }
