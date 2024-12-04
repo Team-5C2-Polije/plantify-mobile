@@ -40,18 +40,23 @@ class DetailPhotoPage extends StatelessWidget {
                 height: 20.h,
               ),
               Obx(() {
-                return Container(
-                  width: double.infinity,
-                  height: 250.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.r),
-                    child: Image.network(
-                      controller.currentPhoto.value.photoUrl ?? '',
-                      fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: (){
+                    controller.goToPhotoViewer();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 250.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.r),
+                      child: Image.network(
+                        controller.currentPhoto.value.photoUrl ?? '',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 );

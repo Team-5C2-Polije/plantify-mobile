@@ -8,6 +8,7 @@ import 'package:tomato_leaf/data/models/device/photo_model.dart';
 import 'package:tomato_leaf/domain/entities/device/photo_entity.dart';
 import 'package:tomato_leaf/domain/usecases/device/get_detail_photo_usecase.dart';
 import 'package:tomato_leaf/feature/device/presentation/photos/photo_argument.dart';
+import 'package:tomato_leaf/feature/device/presentation/photos/photo_view/photo_viewer_page.dart';
 
 class DetailPhotoController extends GetxController {
   final GetDetailPhotoUseCase getDetailPhotoUseCase;
@@ -91,5 +92,12 @@ class DetailPhotoController extends GetxController {
     }catch(ex, s){
       LogPrint.exception(ex, s, this, 'tapLeft');
     }
+  }
+
+  void goToPhotoViewer() {
+    Get.toNamed(
+      PhotoViewerPage.routeName.toString(),
+      arguments: currentPhoto.value.photoUrl,
+    );
   }
 }

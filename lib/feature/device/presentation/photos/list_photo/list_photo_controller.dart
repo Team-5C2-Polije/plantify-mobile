@@ -196,7 +196,7 @@ class ListPhotoController extends GetxController {
         return;
       }
 
-      final croppedImage = await _croppingImage(file, cropStyle: CropStyle.circle);
+      final croppedImage = await _croppingImage(file);
 
       if (croppedImage != null) {
         // update image after cropped

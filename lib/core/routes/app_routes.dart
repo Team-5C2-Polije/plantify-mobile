@@ -5,6 +5,8 @@ import 'package:tomato_leaf/feature/device/presentation/photos/detail_photo/deta
 import 'package:tomato_leaf/feature/device/presentation/photos/detail_photo/detail_photo_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_binding.dart';
 import 'package:tomato_leaf/feature/device/presentation/photos/list_photo/list_photo_page.dart';
+import 'package:tomato_leaf/feature/device/presentation/photos/photo_view/photo_viewer_binding.dart';
+import 'package:tomato_leaf/feature/device/presentation/photos/photo_view/photo_viewer_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_binding.dart';
 import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_page.dart';
 import 'package:tomato_leaf/feature/device/presentation/watering_history/watering_history_binding.dart';
@@ -103,6 +105,11 @@ class AppRoutes {
       name: DetailPhotoPage.routeName.toString(),
       page: () => const DetailPhotoPage(),
       binding: DetailPhotoBinding(),
+    ),
+    GetPage(
+      name: PhotoViewerPage.routeName.toString(),
+      page: () => const PhotoViewerPage(),
+      binding: PhotoViewerBinding(),
     ),
     GetPage(
       name: WateringManuallyPage.routeName.toString(),
