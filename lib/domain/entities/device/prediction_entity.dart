@@ -1,13 +1,13 @@
 class PredictionEntity {
-  final String? className;
+  final String? label;
   final double? confidence;
-  final int? height;
-  final int? width;
-  final double? x;
-  final double? y;
+  final num? height;
+  final num? width;
+  final num? x;
+  final num? y;
 
   PredictionEntity({
-    this.className,
+    this.label,
     this.confidence,
     this.height,
     this.width,

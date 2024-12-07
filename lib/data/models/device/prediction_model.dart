@@ -1,37 +1,34 @@
+import 'package:tomato_leaf/core/utils/log_print.dart';
 import 'package:tomato_leaf/domain/entities/device/prediction_entity.dart';
 
 class PredictionModel {
-  final String? className;
-  final double? confidence;
-  final int? height;
-  final int? width;
-  final double? x;
-  final double? y;
+  final String? label;
+  final num? height;
+  final num? width;
+  final num? x;
+  final num? y;
 
   PredictionModel({
-    this.className,
-    this.confidence,
+    this.label,
     this.height,
     this.width,
     this.x,
     this.y,
   });
 
-  factory PredictionModel.fromJson(String key, dynamic value) {
+  factory PredictionModel.fromJson(dynamic value) {
     return PredictionModel(
-      className: value['class'] as String?,
-      confidence: (value['confidence'] as num?)?.toDouble(),
-      height: value['height'] as int?,
-      width: value['width'] as int?,
-      x: (value['x'] as num?)?.toDouble(),
-      y: (value['y'] as num?)?.toDouble(),
+      label: value['label'] as String?,
+      height: value['height'] as num?,
+      width: value['width'] as num?,
+      x: value['x'] as num?,
+      y: value['y'] as num?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'class': className,
-      'confidence': confidence,
+      'class': label,
       'height': height,
       'width': width,
       'x': x,
@@ -41,8 +38,7 @@ class PredictionModel {
 
   PredictionEntity toEntity() {
     return PredictionEntity(
-      className: className,
-      confidence: confidence,
+      label: label,
       height: height,
       width: width,
       x: x,
@@ -52,12 +48,17 @@ class PredictionModel {
 
   static PredictionModel fromEntity(PredictionEntity entity) {
     return PredictionModel(
-      className: entity.className,
-      confidence: entity.confidence,
+      label: entity.label,
       height: entity.height,
       width: entity.width,
       x: entity.x,
       y: entity.y,
     );
+  }
+
+  static List<PredictionModel> fromListJson(List<dynamic> jsonList) {
+    return jsonList.map((item) {
+      return PredictionModel.fromJson(item);
+    }).toList();
   }
 }

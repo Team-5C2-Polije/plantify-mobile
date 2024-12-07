@@ -111,11 +111,12 @@ class ListPhotoController extends GetxController {
       arguments: photoArgument,
     );
   }
-
   Future<void> _uploadPhoto() async {
-    try{
+    try {
       if (selectedImage.value != null) {
         File file = File(selectedImage.value!.path);
+
+        showLoadingDialog();
 
         final response = await addPhotoUseCase.call(
           deviceId: deviceId.value,
@@ -124,17 +125,54 @@ class ListPhotoController extends GetxController {
 
         Map<String, dynamic> payload = response?.data;
 
-        if(response?.statusCode == HttpStatus.ok){
+        if (response?.statusCode == HttpStatus.ok) {
           Fluttertoast.showToast(msg: "Foto berhasil diupload");
-        }else{
+        } else {
           Fluttertoast.showToast(msg: "Failure : ${payload['message']}");
         }
       } else {
         LogPrint.error('No file selected.');
       }
-    }catch(ex, s){
+    } catch (ex, s) {
       LogPrint.exception(ex, s, this, 'uploadPhoto');
+    } finally {
+      Get.back();
     }
+  }
+
+  void showLoadingDialog() {
+    Get.dialog(
+      WillPopScope(
+        onWillPop: () async => false,
+        child: Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(
+                  color: Colors.blueAccent,
+                  strokeWidth: 5,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Uploading...',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
   }
 
   Future<void> pickImageFromGallery() async {

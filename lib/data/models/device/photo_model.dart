@@ -21,10 +21,9 @@ class PhotoModel {
       createdAt: json['createdAt'] as String?,
       id: json['id'] as String?,
       photoUrl: json['photoUrl'] as String?,
-      predictions: (json['predictions'] as Map<String, dynamic>?)
-          ?.entries
-          .map((entry) => PredictionModel.fromJson(entry.key, entry.value))
-          .toList(),
+      predictions: json['predictions'] != null
+          ? PredictionModel.fromListJson(json['predictions'])
+          : [],
       updatedAt: json['updatedAt'] as String?,
     );
   }

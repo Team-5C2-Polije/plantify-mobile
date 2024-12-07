@@ -70,45 +70,53 @@ class DetailPhotoPage extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              controller.currentPhoto.value.predictions?.isNotEmpty == false
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount:
-                          controller.currentPhoto.value.predictions?.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 1, color: Colors.black),
+              Obx(() {
+                return controller.currentPhoto.value.predictions?.isNotEmpty == true
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.currentPhoto.value.predictions?.length,
+                        itemBuilder: (context, index) {
+                          var predict = controller.currentPhoto.value.predictions?[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 1, color: Colors.black),
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(10))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("No : ${++index}"),
-                                  Text("X : 10"),
-                                  Text("Y : 10"),
-                                  Text("Height : 10"),
-                                  Text("Width : 10"),
-                                  Text("Class : 10"),
-                                ],
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    buildPredictText("No : ${++index}"),
+                                    buildPredictText("X : ${predict?.x}"),
+                                    buildPredictText("Y : ${predict?.y}"),
+                                    buildPredictText("Height : ${predict?.height}"),
+                                    buildPredictText("Width : ${predict?.width}"),
+                                    buildPredictText("Class : ${predict?.label}"),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    )
-                  : Container()
+                          );
+                        },
+                      )
+                    : Container(
+                        child: buildPredictText(
+                            "Tidak ada prediksi yang terdeteksi"),
+                      );
+              }),
+              SizedBox(height: 100.h),
             ],
           ),
         ),
       ),
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         width: double.infinity,
         child: Align(
           alignment: Alignment.bottomCenter,
@@ -169,6 +177,17 @@ class DetailPhotoPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Text buildPredictText(String text) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

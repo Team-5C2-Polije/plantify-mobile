@@ -71,14 +71,6 @@ class ListPhotoPage extends StatelessWidget {
               ],
             ),
           ),
-          Obx(() {
-            return controller.isLoadingUploadImage.value
-                ? const Positioned.fill(
-                    child: Center(
-                    child: CircularProgressIndicator(),
-                  ))
-                : Container();
-          })
         ],
       ),
       floatingActionButton: GestureDetector(
