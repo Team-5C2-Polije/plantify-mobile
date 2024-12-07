@@ -7,8 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomato_leaf/core/styles/app_sizes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tomato_leaf/core/utils/datetime_converter.dart';
-import 'package:tomato_leaf/feature/device/presentation/detail_device/detail_device_page.dart';
-import 'package:tomato_leaf/feature/device/presentation/update_device/update_device_page.dart';
 import 'package:tomato_leaf/feature/profile/presentation/notification/notification_page.dart';
 import 'package:tomato_leaf/feature/profile/presentation/profile/profile_page.dart';
 import 'package:tomato_leaf/feature/utils/presentation/dashboard/dashboard_controller.dart';
@@ -77,8 +75,7 @@ class DashboardPage extends StatelessWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(NotificationPage.routeName
-                                            .toString());
+                                        Get.toNamed(NotificationPage.routeName.toString());
                                       },
                                       child: SvgPicture.asset(
                                         'assets/icons/ic-notif.svg',
@@ -89,8 +86,7 @@ class DashboardPage extends StatelessWidget {
                                     SizedBox(width: 8.w),
                                     GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(
-                                            ProfilePage.routeName.toString());
+                                        Get.toNamed(ProfilePage.routeName.toString());
                                       },
                                       child: SizedBox(
                                         width: 30.w,
@@ -109,14 +105,14 @@ class DashboardPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10.h),
-                      DashboarAction(controller: controller),
+                      DashboardAction(controller: controller),
                       Obx(() {
                         return ListView.builder(
-                          itemCount: controller.myDevices.length,
+                          itemCount: controller.filteredDevices.length,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            var device = controller.myDevices[index];
+                            var device = controller.filteredDevices[index];
                             return GestureDetector(
                               onTap: () async {
                                 controller.goToDetailDevice(index: index);
@@ -228,6 +224,86 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
+class DashboardAction extends StatelessWidget {
+  const DashboardAction({
+    super.key,
+    required this.controller,
+  });
+
+  final DashboardController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 75,
+          child: Container(
+            height: 50.h,
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: AppSizes.radiusMedium,
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Cari Nama Device ....",
+                        hintStyle: GoogleFonts.poppins(color: Colors.white),
+                        border: InputBorder.none,
+                      ),
+                      style: GoogleFonts.poppins(color: Colors.white),
+                      textInputAction: TextInputAction.search,
+                      onChanged: (text) {
+                        controller.filterDevices(text);
+                      },
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    'assets/icons/ic-search.svg',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        SizedBox(width: 5.w),
+        Expanded(
+          flex: 15,
+          child: GestureDetector(
+            onTap: () {
+              controller.goToUpdateDeviceAddMode();
+            },
+            child: Container(
+              height: 50.h,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: AppSizes.radiusMedium,
+                  border: Border.all(
+                    color: AppColors.primaryColor,
+                    width: 4,
+                  )),
+              child: const Center(
+                child: Icon(
+                  Icons.add,
+                  size: 35,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 void showSheet(
   BuildContext context,
   DashboardController controller,
@@ -267,73 +343,4 @@ void showSheet(
       );
     },
   );
-}
-
-class DashboarAction extends StatelessWidget {
-  const DashboarAction({
-    super.key,
-    required this.controller,
-  });
-
-  final DashboardController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 75,
-          child: Container(
-            height: 50.h,
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: AppSizes.radiusMedium,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Cari Nama Device .... ",
-                    style: GoogleFonts.poppins(color: Colors.white),
-                  ),
-                  SvgPicture.asset(
-                    'assets/icons/ic-search.svg',
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: 5.w),
-        Expanded(
-          flex: 15,
-          child: GestureDetector(
-            onTap: () {
-              controller.goToUpdateDeviceAddMode();
-            },
-            child: Container(
-              height: 50.h,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: AppSizes.radiusMedium,
-                  border: Border.all(
-                    color: AppColors.primaryColor,
-                    width: 4,
-                  )),
-              child: const Center(
-                child: Icon(
-                  Icons.add,
-                  size: 35,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }

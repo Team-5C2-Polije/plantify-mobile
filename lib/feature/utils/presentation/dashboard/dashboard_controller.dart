@@ -27,6 +27,8 @@ class DashboardController extends GetxController {
   var deviceIds = <String>[].obs;
   var userData = UserEntity().obs;
   var myDevices = <DeviceEntity>[].obs;
+  var filteredDevices = <DeviceEntity>[].obs;
+  var searchQuery = ''.obs;
 
   DashboardController({
     required this.getCurrentLoginUseCase,
@@ -49,6 +51,7 @@ class DashboardController extends GetxController {
       deviceIds.value = await getDeviceIdsUseCase() ?? [];
       userData.value = await getCurrentLoginUseCase() ?? UserEntity();
       myDevices.value = await getMyDevices() ?? [];
+      filteredDevices.assignAll(myDevices);
     }catch(ex, s){
       LogPrint.exception(ex, s, this, 'fetchData');
     }
@@ -68,6 +71,19 @@ class DashboardController extends GetxController {
     }
 
     return [];
+  }
+
+  void filterDevices(String query) {
+    searchQuery.value = query;
+    if (query.isEmpty) {
+      filteredDevices.assignAll(myDevices);
+    } else {
+      filteredDevices.assignAll(
+        myDevices.where((device) {
+          return device.name?.toLowerCase().contains(query.toLowerCase()) == true;
+        }).toList(),
+      );
+    }
   }
 
   Future<void> goToUpdateDeviceAddMode() async {
