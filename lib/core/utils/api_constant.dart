@@ -1,9 +1,11 @@
 class ApiConstant {
-  static const String baseUrl = 'http://192.168.34.152:5000/';
+  static const String baseUrl = 'http://192.168.110.152:5000/';
   // auth
   static const String authEndpoint = 'auth';
   static const String addUserDeviceEndpoint = 'add_device';
   static const String deleteUserDeviceEndpoint = 'del_device';
+  static const String notificationsEndpoint = 'notifications';
+  static const String logoutEndpoint = 'logout';
   // device
   static const String createDeviceEndpoint = 'device/create_device';
   static const String updateDeviceEndpoint = 'device/update_device';

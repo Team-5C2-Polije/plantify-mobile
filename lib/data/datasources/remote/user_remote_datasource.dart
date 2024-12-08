@@ -65,4 +65,36 @@ class UserRemoteDataSource{
       return null;
     }
   }
+
+  Future<dio.Response?> notifications({
+    required String email,
+  }) async {
+    try {
+      return await _dioService.dio.get(
+        ApiConstant.notificationsEndpoint,
+        data: {
+          "email": email,
+        },
+      );
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, 'notifications');
+      return null;
+    }
+  }
+
+  Future<dio.Response?> logoutFromApi({
+    required String email,
+  }) async {
+    try {
+      return await _dioService.dio.post(
+        ApiConstant.logoutEndpoint,
+        data: {
+          "email": email,
+        },
+      );
+    } catch (ex, s) {
+      LogPrint.exception(ex, s, this, 'logoutFromApi');
+      return null;
+    }
+  }
 }

@@ -73,7 +73,7 @@ class DetailDevicePage extends StatelessWidget {
                 children: [
                   Obx(() {
                     return ItemFeature(
-                      imagePath: 'assets/icons/ic-water-blue.svg',
+                      imagePath: 'assets/icons/ic_temperature.svg',
                       title: "Temperature",
                       value: "${controller.temperature.value}°C",
                       onTap: () {
@@ -83,8 +83,8 @@ class DetailDevicePage extends StatelessWidget {
                   }),
                   Obx(() {
                     return ItemFeature(
-                      imagePath: 'assets/icons/ic-sun-orange.svg',
-                      title: "Soil Moisture",
+                      imagePath: 'assets/icons/ic_soil.svg',
+                      title: "Kelembapan",
                       value: "${controller.soilMoisture.value}",
                       onTap: () {
                         // Get.toNamed(LightIntensityPage.routeName.toString());

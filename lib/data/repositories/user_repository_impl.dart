@@ -75,4 +75,14 @@ class UserRepositoryImpl implements UserRepository{
   Future<UserEntity?> getCurrentLogin() async {
     return await authLocalDataSource.getCurrentLogin();
   }
+
+  @override
+  Future<Response?> notifications({required String email}) async {
+    return await authRemoteDataSource.notifications(email: email);
+  }
+
+  @override
+  Future<Response?> logoutFromApi({required String email}) async {
+    return await authRemoteDataSource.logoutFromApi(email: email);
+  }
 }

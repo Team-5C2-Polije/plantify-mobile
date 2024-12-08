@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tomato_leaf/core/routes/app_routes.dart';
 import 'package:tomato_leaf/core/utils/log_print.dart';
 import 'package:tomato_leaf/domain/entities/user/user_entity.dart';
 import 'package:tomato_leaf/domain/usecases/user/get_current_login_usecase.dart';
+import 'package:tomato_leaf/domain/usecases/user/logout_from_api_usecase.dart';
 import 'package:tomato_leaf/domain/usecases/user/logout_from_local_usecase.dart';
 import 'package:tomato_leaf/feature/utils/presentation/auth/auth_page.dart';
 
 class ProfileController extends GetxController {
   final GetCurrentLoginUseCase getCurrentLoginUseCase;
   final LogoutFromLocalUseCase logoutFromLocalUseCase;
+  final LogoutFromApiUseCase logoutFromApiUseCase;
 
   var userData = UserEntity().obs;
 
   ProfileController({
     required this.getCurrentLoginUseCase,
     required this.logoutFromLocalUseCase,
+    required this.logoutFromApiUseCase,
   });
 
   @override
@@ -66,6 +68,7 @@ class ProfileController extends GetxController {
   Future<void> logout() async {
     try{
       await logoutFromLocalUseCase();
+      logoutFromApiUseCase(email: userData.value.email ?? "");
       Get.offAllNamed(AuthPage.routeName.toString());
     }catch(ex, s){
       LogPrint.exception(ex, s, this, 'logout');

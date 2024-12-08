@@ -1,4 +1,3 @@
-import 'package:tomato_leaf/core/utils/log_print.dart';
 import 'package:tomato_leaf/domain/entities/device/prediction_entity.dart';
 
 class PredictionModel {

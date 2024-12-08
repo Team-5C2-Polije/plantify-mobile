@@ -31,4 +31,12 @@ abstract class UserRepository {
   Future<List<String>?> getDeviceIds();
 
   Future<UserEntity?> getCurrentLogin();
+
+  Future<Response?> notifications({
+    required String email,
+  });
+
+  Future<Response?> logoutFromApi({
+    required String email,
+  });
 }
