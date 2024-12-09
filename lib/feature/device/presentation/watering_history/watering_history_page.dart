@@ -21,7 +21,7 @@ class WateringHistoryPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Obx(() {
         return PageTitle(
-          pageTitle: 'History Penyiraman',
+          pageTitle: 'Histori Penyiraman',
           deviceName: '${controller.deviceDetail.value.name}',
           photo: 'assets/images/img-device.png',
           token: '${controller.deviceDetail.value.token}',
