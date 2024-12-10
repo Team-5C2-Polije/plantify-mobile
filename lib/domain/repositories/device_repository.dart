@@ -51,7 +51,7 @@ abstract class DeviceRepository{
     required String hour,
   });
 
-  Stream<int> getSensorValue({
+  Stream<num> getSensorValue({
     required String deviceId,
     required String data,
   });

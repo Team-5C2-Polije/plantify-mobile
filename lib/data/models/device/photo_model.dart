@@ -4,6 +4,7 @@ import 'package:tomato_leaf/domain/entities/device/photo_entity.dart';
 class PhotoModel {
   final String? createdAt;
   final String? id;
+  final String? from;
   final String? photoUrl;
   final List<PredictionModel>? predictions;
   final String? updatedAt;
@@ -11,6 +12,7 @@ class PhotoModel {
   PhotoModel({
     this.createdAt,
     this.id,
+    this.from,
     this.photoUrl,
     this.predictions,
     this.updatedAt,
@@ -20,6 +22,7 @@ class PhotoModel {
     return PhotoModel(
       createdAt: json['createdAt'] as String?,
       id: json['id'] as String?,
+      from: json['from'] as String?,
       photoUrl: json['photoUrl'] as String?,
       predictions: json['predictions'] != null
           ? PredictionModel.fromListJson(json['predictions'])
@@ -38,6 +41,7 @@ class PhotoModel {
     return {
       'createdAt': createdAt,
       'id': id,
+      'from': from,
       'photoUrl': photoUrl,
       'predictions': predictions?.map((e) => e.toJson()).toList(),
       'updatedAt': updatedAt,
@@ -48,6 +52,7 @@ class PhotoModel {
     return PhotoEntity(
       createdAt: createdAt != null ? DateTime.tryParse(createdAt!) : null,
       id: id,
+      from: from,
       photoUrl: photoUrl,
       predictions: predictions?.map((e) => e.toEntity()).toList(),
       updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt!) : null,
@@ -58,6 +63,7 @@ class PhotoModel {
     return PhotoModel(
       createdAt: entity.createdAt?.toIso8601String(),
       id: entity.id,
+      from: entity.from,
       photoUrl: entity.photoUrl,
       predictions: entity.predictions?.map((e) => PredictionModel.fromEntity(e)).toList(),
       updatedAt: entity.updatedAt?.toIso8601String(),

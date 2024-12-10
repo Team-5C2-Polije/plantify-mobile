@@ -5,7 +5,7 @@ class GetSensorValueUseCase {
 
   GetSensorValueUseCase(this.repository);
 
-  Stream<int> call({
+  Stream<num> call({
     required String deviceId,
     required String data,
   }) {

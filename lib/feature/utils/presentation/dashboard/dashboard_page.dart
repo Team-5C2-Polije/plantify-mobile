@@ -168,7 +168,7 @@ class DashboardPage extends StatelessWidget {
                                                 Text(
                                                   "${device.sensors?.waterVol ?? 0}",
                                                   style: GoogleFonts.inter(
-                                                    fontSize: 30,
+                                                    fontSize: 28,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -180,7 +180,7 @@ class DashboardPage extends StatelessWidget {
                                                 Text(
                                                   "${device.sensors?.lightIntensity ?? 0}",
                                                   style: GoogleFonts.inter(
-                                                    fontSize: 30,
+                                                    fontSize: 28,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -192,13 +192,10 @@ class DashboardPage extends StatelessWidget {
                                                   onTap: () {
                                                     showSheet(context, controller, index);
                                                   },
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                        20, 20, 8, 20),
-                                                    child: SvgPicture.asset(
-                                                      'assets/icons/ic-tree.svg',
-                                                    ),
+                                                  child: SvgPicture.asset(
+                                                    'assets/icons/ic-tree.svg',
+                                                    width: 10,
+                                                    height: 10,
                                                   ),
                                                 )
                                               ],

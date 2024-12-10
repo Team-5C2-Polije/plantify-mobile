@@ -119,7 +119,7 @@ class DeviceRepositoryImpl implements DeviceRepository {
   }
 
   @override
-  Stream<int> getSensorValue({
+  Stream<num> getSensorValue({
     required String deviceId,
     required String data,
   }) {

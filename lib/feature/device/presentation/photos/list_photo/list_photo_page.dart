@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomato_leaf/core/styles/app_colors.dart';
@@ -38,14 +39,14 @@ class ListPhotoPage extends StatelessWidget {
                 }),
                 Obx(() {
                   return Padding(
-                    padding: EdgeInsets.all(15.r),
+                    padding: EdgeInsets.all(10.r),
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        crossAxisSpacing: 4.0,
-                        mainAxisSpacing: 4.0,
+                        crossAxisSpacing: 2.0,
+                        mainAxisSpacing: 2.0,
                       ),
                       itemCount: controller.photos.length,
                       itemBuilder: (context, index) {
@@ -58,9 +59,16 @@ class ListPhotoPage extends StatelessWidget {
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Image.network(
-                              controller.photos[index].photoUrl ?? '',
+                            child: CachedNetworkImage(
+                              imageUrl: controller.photos[index].photoUrl ?? '',
                               fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.error,
+                                color: Colors.red,
+                              ),
                             ),
                           ),
                         );

@@ -17,12 +17,11 @@ class DetailPhotoController extends GetxController {
   PhotoArgument? photoArgument;
   var deviceId = ''.obs;
   var photos = <PhotoEntity>[].obs;
-  // Properti lainnya tetap seperti semula
   var index = 0.obs;
-
-  // Getter untuk nilai index ditambah 1
   int get displayIndex => index.value + 1;
   var currentPhoto = PhotoEntity().obs;
+  var healthyPercentage = 0.obs;
+  var sickPercentage = 0.obs;
 
   DetailPhotoController({
     required this.getDetailPhotoUseCase,
@@ -57,9 +56,20 @@ class DetailPhotoController extends GetxController {
 
       if (response?.statusCode == HttpStatus.ok && payload != null) {
         currentPhoto.value = PhotoModel.fromJson(payload['data']).toEntity();
+        if(currentPhoto.value.predictions?.isEmpty == true) return;
+
         for(var predict in currentPhoto.value.predictions as List<PredictionEntity>){
           LogPrint.info("predict : ${predict.label}");
         }
+        int totalPredict = currentPhoto.value.predictions!.length;
+        healthyPercentage.value = (((currentPhoto.value.predictions
+        !.where((e) => e.label == 'Sehat')
+            .toList()
+            .length) / totalPredict) * 100).toInt();
+        sickPercentage.value = (((currentPhoto.value.predictions
+        !.where((e) => e.label == 'Sakit')
+            .toList()
+            .length) / totalPredict) * 100).toInt();
       } else {
         Fluttertoast.showToast(
           msg: "Failed to get data: ${payload?['message'] ?? 'Unknown error'}",

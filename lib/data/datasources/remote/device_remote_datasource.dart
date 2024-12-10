@@ -177,7 +177,7 @@ class DeviceRemoteDataSource {
     }
   }
 
-  Stream<int> getSensorValue({required String deviceId, required String data}) {
+  Stream<num> getSensorValue({required String deviceId, required String data}) {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       return firestore

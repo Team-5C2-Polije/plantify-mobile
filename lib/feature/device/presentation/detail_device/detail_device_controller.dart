@@ -18,16 +18,16 @@ class DetailDeviceController extends GetxController {
   final GetUpdatedAtUseCase getUpdatedAtUseCase;
 
   var deviceId = ''.obs;
-  var lightIntensity = 0.obs;
-  var waterVol = 0.obs;
-  var temperature = 0.obs;
-  var soilMoisture = 0.obs;
+  var lightIntensity = Rx<num>(0);
+  var waterVol = Rx<num>(0);
+  var temperature = Rx<num>(0);
+  var soilMoisture = Rx<num>(0);
   var updatedAt = ''.obs;
   var deviceDetail = DeviceEntity().obs;
-  late StreamSubscription<int> _subLightIntensity;
-  late StreamSubscription<int> _subVolume;
-  late StreamSubscription<int> _subTemperature;
-  late StreamSubscription<int> _subSoilMoisture;
+  late StreamSubscription<num> _subLightIntensity;
+  late StreamSubscription<num> _subVolume;
+  late StreamSubscription<num> _subTemperature;
+  late StreamSubscription<num> _subSoilMoisture;
   late StreamSubscription<String> _subUpdatedAt;
 
   DetailDeviceController({
